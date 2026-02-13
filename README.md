@@ -21,16 +21,17 @@ We move away from noisy, signal-only alerts to focus on **explainable security**
 ## 🏗️ Architecture & Integration
 Sentinel Trace acts as the **Thinking Brain**, designed to feed high-confidence decisions into the **Sovereign Shield** (the Enforcement Plane).
 
-| Layer / Category        | Component   | Role                                      |
-|-------------------------|------------|-------------------------------------------|
-| Infrastructure          | Debian 12  | Host OS (Bare-metal / VM)                 |
-| Kernel Observability    | eBPF       | Low-level telemetry provider              |
-| Runtime Security        | Tetragon   | Runtime security & observability engine   |
-| User Interface / CLI    | CLI tetra  | Real-time event visualization             |
+```mermaid
+graph TD
+    A[Activity Source: Web/User] --> B[Linux Kernel]
+    B -->|eBPF Hooks| C[Sentinel Trace]
+    C -->|Context Enrichment| D{Reasoning Engine}
+    D -->|Suspicious| E[Decision: ALERT]
+    D -->|Normal| F[Decision: IGNORE]
+    E -.-> G[Sovereign Shield: ENFORCE]
+```
 
-
-🧪 MVP (Minimum Viable Product) Scenario: Suspicious Shell Spawning
-The Question: Why is a public-facing HTTP service spawning a shell?
+### 🧪 MVP (Minimum Viable Product) Scenario: Suspicious Shell Spawning (***The Question: Why is a public-facing HTTP service spawning a shell?***)
 
 🔎 Observed Signals
 - Event: ``process_exec``
@@ -99,7 +100,7 @@ The service is configured to automatically load all policies located in `/etc/te
 
 Clone the repository and run the install script to deploy the engine and policies:
 ```
-git clone [https://github.com/TON_NOM/sentinel-trace.git](https://github.com/OBadolo/sentinel-trace.git)
+git clone [https://github.com/OBadolo/sentinel-trace.git](https://github.com/OBadolo/sentinel-trace.git)
 cd sentinel-trace
 chmod +x install.sh
 sudo ./install.sh
