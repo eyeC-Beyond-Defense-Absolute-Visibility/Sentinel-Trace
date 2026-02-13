@@ -14,8 +14,7 @@ While most security tools focus on signatures (what a file *looks* like), Sentin
 
 ### 🧭 Roadmap
 - [x] v1.0 Genesis: Single-signal detection & Manual reasoning.
-- [ ] v2.0 Correlation: Multi-signal (Process + Network) correlation (Work in Progress).
-- [ ] v2.5 MITRE Mapping: Direct mapping to ATT&CK techniques (Work in Progress).
+- [ ] v2.0 Correlation & MITRE Mapping: Reverse Shell & ATT&CK techniques
 - [ ] v3.0 Sovereign Bridge: Automated enforcement via Sovereign Shield (Work in Progress).
 
 ### Operating Systems
@@ -127,22 +126,6 @@ The service is configured to automatically load all policies located in `/etc/te
 │ ├─ Auto-restart          │
 │ └─ Hot policy loading    │
 └──────────────────────────┘
-```
-
-# 🛰️ Sentinel Trace v2.0 — Correlation: Multi-signal (Work in Progress)
-**Status: In Development (feature/v2-correlation branch)**
-
-### Objectives
-- Link process execution to network activity.
-- Detect "Inbound Shell" vs "Outbound Connection" (Reverse Shell pattern).
-- Isolate suspicious web traffic from `www-data`.
-
-### New Policies
-- `network-observability.yaml`: Monitors `__sys_connect` to capture destination IPs.
-
-### Proof of Concept (v2)
-```json
-// here goes the JSON obtained with curl test
 ```
 
 
