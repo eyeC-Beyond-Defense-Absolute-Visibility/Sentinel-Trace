@@ -83,7 +83,8 @@ sudo tetra getevents
 ![Detection Log](assets/img/v1/detection_log.png)
 
 
-## Hou to check logs
+## Tips:
+***How to check logs***
 ```
 # To follow real-time alerts for the Nginx user:
 sudo tetra getevents --output json | jq -ce 'select(.process_exec.process.uid == 33)'
@@ -98,7 +99,7 @@ sudo tetra getevents --output json | jq -ce 'select(.process_exec.process.uid ==
     The service is configured to automatically load all policies located in `/etc/tetragon/tracingpolicies/`. This creates an **evolvable security system**: to update the protection or add new detection rules, you simply drop a new `.yaml` file into the directory.      The kernel hooks are updated without any service interruption or application downtime.
 ---
 
-### 🧩 Core Architecture Overview
+### 🧩 Core Architecture Further View
 
 ```text
 ┌──────────────────────────┐
