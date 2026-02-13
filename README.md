@@ -110,7 +110,7 @@ sudo ./install.sh
 This project is part of the Sovereign Shield Ecosystem.
 
 
-## 🛰️ Sentinel Trace v2.0 — Correlation: Multi-signal
+# 🛰️ Sentinel Trace v2.0 — Correlation: Multi-signal (Work in Progress)
 **Status: In Development (feature/v2-correlation branch)**
 
 ### Objectives
