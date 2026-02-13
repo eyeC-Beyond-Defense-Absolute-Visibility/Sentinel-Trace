@@ -99,7 +99,7 @@ The service is configured to automatically load all policies located in `/etc/te
 
 Clone the repository and run the install script to deploy the engine and policies:
 ```
-git clone [https://github.com/TON_NOM/sentinel-trace.git](https://github.com/OBadolo/sentinel-trace.git)
+git clone [https://github.com/OBadolo/sentinel-trace.git](https://github.com/OBadolo/sentinel-trace.git)
 cd sentinel-trace
 chmod +x install.sh
 sudo ./install.sh
