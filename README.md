@@ -2,7 +2,7 @@
 ![Status](https://img.shields.io/badge/Status-Success_PoC-success?style=for-the-badge)
 
 
-# 🛰️ Sentinel Trace v2.0 — Correlation & Context: Exploring Reverse Shell (Work in Progress)
+# 🛰️ Sentinel Trace v2.0 — Correlation: Exploring Reverse Shell (In Progress)
 
 **The Goal:** Moving from isolated signals to **behavioral chains**. 
 Instead of just seeing a process, we link it to network activity and MITRE ATT&CK techniques.
@@ -26,14 +26,13 @@ Sentinel Trace v2.0 will detect the following sequence as a single high-priority
 - First automated enforcement rules (**Sigkill** on confirmed C2 connections).
 
 
-# 🧪 Tetragon Standalone — RCE Correlation Lab (Genesis)
+## 🧪 V2.0 Correlation Lab (Genesis)
 
-## 🛠️ Step-by-Step Lab Setup
+### 🛠️ Step-by-Step Lab Setup
 
 ---
 
-## 1️⃣ Attacker (Kali) Side 
-![Detection Log](assets/img/v2/v2-network-traffic-detection.png)
+### 1️⃣ Attacker (Kali) Side 
 
 Listener receiving incoming connection from the target
 
@@ -44,7 +43,8 @@ nc -lvnp 4444
 
 ---
 
-## 2️⃣ Target (Debian) Side
+### 2️⃣ Target (Debian) Side
+![Detection Log](assets/img/v2/v2-network-traffic-detection.png)
 ![Detection Log](assets/img/v2/v2-tracing-policy-activation.png)
 
 Activation of the correlation policy and launch of real-time monitoring with Identity ("organization","Tetragon","cilium ebpf security tool").
@@ -61,7 +61,7 @@ sudo tetra getevents --output json | jq -ce '
 
 ---
 
-## 3️⃣ The Attack (Exploit Simulation)
+### 3️⃣ The Attack (Exploit Simulation)
 ![Detection Log](assets/img/v2/v2-kali-listener-connection-reverse-shell.png)
 
 Simulation of reverse shell activation as a web user.
