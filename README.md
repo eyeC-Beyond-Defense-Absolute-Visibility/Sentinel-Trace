@@ -106,13 +106,26 @@ chmod +x install.sh
 sudo ./install.sh
 ```
 
-👤 Author
-O’djuma Badolo Cybersecurity • Cloud • DevSecOps
 
 This project is part of the Sovereign Shield Ecosystem.
 
 
-#  Version 2, Correlation: Multi-signal (Process + Network) correlation.
+## 🛰️ Sentinel Trace v2.0 — Correlation: Multi-signal
+**Status: In Development (feature/v2-correlation branch)**
 
- -- In progress...
- -- In progress..."# Sentinel-Trace" 
+### Objectives
+- Link process execution to network activity.
+- Detect "Inbound Shell" vs "Outbound Connection" (Reverse Shell pattern).
+- Isolate suspicious web traffic from `www-data`.
+
+### New Policies
+- `network-observability.yaml`: Monitors `__sys_connect` to capture destination IPs.
+
+### Proof of Concept (v2)
+```json
+// here goes the JSON obtained with curl test
+
+
+
+👤 Author
+O’djuma Badolo Cybersecurity • Cloud • DevSecOps
