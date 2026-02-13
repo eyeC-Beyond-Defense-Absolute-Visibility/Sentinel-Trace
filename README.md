@@ -107,33 +107,6 @@ sudo ./install.sh
 ```
 
 
-⚙️ System Integration & Persistence
-To transform a manual laboratory into a production-ready security solution, Sentinel Trace implements Infrastructure as Code (IaC) principles through two core components:
-
-1. The Deployment Engine (install.sh)
-Manual configuration is the enemy of security consistency. The install.sh script was created to:
-
-Standardize Environments: Automatically creates the /etc/tetragon/tracingpolicies/ directory structure.
-
-Automate Policy Injection: Moves all v1 and v2 YAML policies from the development folder to the system's enforcement directory.
-
-Bootstrap Service: Configures permissions, reloads the systemd daemon, and enables the security engine in one command.
-
-2. The Persistence Layer (tetragon.service)
-A security monitor that doesn't survive a reboot is a vulnerability. The tetragon.service (systemd unit) ensures:
-
-Boot-to-Shutdown Protection: The eBPF engine starts automatically before any user-space applications, ensuring no "blind spots" during boot.
-
-Resilience: Automatically restarts the engine in case of failure.
-
-Dynamic Loading: Configured with the --tracing-policy-dir flag, allowing the kernel to "hot-load" any new policy dropped into the directory without restarting the service.
-
-🚀 Automated Installation
-
-
-This project is part of the Sovereign Shield Ecosystem.
-
-
 # 🛰️ Sentinel Trace v2.0 — Correlation: Multi-signal (Work in Progress)
 **Status: In Development (feature/v2-correlation branch)**
 
