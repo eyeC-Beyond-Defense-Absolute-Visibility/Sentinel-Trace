@@ -31,8 +31,7 @@ graph TD
     E -.-> G[Sovereign Shield: ENFORCE]
 ```
 
-🧪 MVP (Minimum Viable Product) Scenario: Suspicious Shell Spawning
-The Question: Why is a public-facing HTTP service spawning a shell?
+### 🧪 MVP (Minimum Viable Product) Scenario: Suspicious Shell Spawning (***The Question: Why is a public-facing HTTP service spawning a shell?***)
 
 🔎 Observed Signals
 - Event: ``process_exec``
