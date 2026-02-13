@@ -16,6 +16,15 @@ We move away from noisy, signal-only alerts to focus on **explainable security**
 - ✅ **Zero Instrumentation:** Security visibility with zero impact on application code.
 - ✅ **Evidence-Based:** Every alert must be backed by a clear parent/child process lineage.
 
+### 🧭 Roadmap
+- [x] v1.0 Genesis: Single-signal detection & Manual reasoning.
+- [ ] v2.0 Correlation: Multi-signal (Process + Network) correlation (Work in Progress).
+- [ ] v2.5 MITRE Mapping: Direct mapping to ATT&CK techniques (Work in Progress).
+- [ ] v3.0 Sovereign Bridge: Automated enforcement via Sovereign Shield (Work in Progress).
+
+### Operating Systems
+- v1.0: Kali Linux & Debian Linux
+- v2.0: Kali Linux, Debian Linux & Metasploitable3
 ---
 
 ## 🏗️ Architecture & Integration
@@ -61,13 +70,6 @@ sudo systemctl enable --now tetragon
 ```
 sudo tetra getevents
 ```
-
-🧭 Roadmap
-- [x] v1.0 Genesis: Single-signal detection & Manual reasoning.
-- [ ] v2.0 Correlation: Multi-signal (Process + Network) correlation.
-- [ ] v2.5 MITRE Mapping: Direct mapping to ATT&CK techniques.
-- [ ] v3.0 Sovereign Bridge: Automated enforcement via Sovereign Shield.
-
 
 ### ⚙️ System Validation
 #### ⚙️ Engine & Service Configuration
