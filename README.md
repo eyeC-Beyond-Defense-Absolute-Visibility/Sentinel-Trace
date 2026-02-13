@@ -89,23 +89,34 @@ sudo tetra getevents
 sudo tetra getevents --output json | jq -ce 'select(.process_exec.process.uid == 33)'
 ```
 
+---
+
 ## ⚙️ System Integration & Persistence
 
+To transform a **manual laboratory** into a **production-ready security solution**, **Sentinel Trace** applies **Infrastructure as Code (IaC)** principles through two tightly coupled core components.
 To ensure continuous runtime monitoring, **Sentinel Trace** is deployed as a `systemd` service. This configuration guarantees that the eBPF hooks are re-attached automatically upon system reboot and provides resilience against service termination.
 
 ### Scalable Security Model
 The service is configured to automatically load all policies located in `/etc/tetragon/tracingpolicies/`. This creates an **evolvable security system**: to update the protection or add new detection rules, you simply drop a new `.yaml` file into the directory. The kernel hooks are updated without any service interruption or application downtime.
+---
 
-### 🚀 Quick Start (Automated Install)
+### 🧩 Core Architecture Overview
 
-Clone the repository and run the install script to deploy the engine and policies:
+```text
+┌──────────────────────────┐
+│ install.sh               │  → Deployment Engine (IaC)
+│ ├─ Directory bootstrap   │
+│ ├─ Policy injection      │
+│ └─ systemd enablement    │
+└────────────┬─────────────┘
+             ↓
+┌──────────────────────────┐
+│ tetragon.service         │  → Persistence Layer
+│ ├─ Boot-time protection  │
+│ ├─ Auto-restart          │
+│ └─ Hot policy loading    │
+└──────────────────────────┘
 ```
-git clone [https://github.com/OBadolo/sentinel-trace.git](https://github.com/OBadolo/sentinel-trace.git)
-cd sentinel-trace
-chmod +x install.sh
-sudo ./install.sh
-```
-
 
 # 🛰️ Sentinel Trace v2.0 — Correlation: Multi-signal (Work in Progress)
 **Status: In Development (feature/v2-correlation branch)**
