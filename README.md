@@ -1,3 +1,6 @@
+![Version](https://img.shields.io/badge/version-2.0--correlation-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Success_PoC-success?style=for-the-badge)
+
 # 🛰️ Sentinel Trace (v1.0 — Genesis)
 
 > **"Signals are cheap. Decisions are earned."** > *Behavioral Detection Lab powered by eBPF & Tetragon.*
