@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: "03-network-observability"
+spec:
+  kprobes:
+  - call: "__sys_connect"
+    syscall: true
+    args:
+    - index: 0
+      type: "int"
+    - index: 1
+      type: "sockaddr" # This is where we retrieve the destination IP address and port.
+    selectors:
+    - matchPIDs:
+      - operator: In
+        values: [33] # We only correlate the activity of www-data
