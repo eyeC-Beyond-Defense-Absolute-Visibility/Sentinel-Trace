@@ -124,7 +124,7 @@ This project is part of the Sovereign Shield Ecosystem.
 ### Proof of Concept (v2)
 ```json
 // here goes the JSON obtained with curl test
-
+```
 
 
 👤 Author
