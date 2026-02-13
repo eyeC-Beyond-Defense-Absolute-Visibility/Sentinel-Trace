@@ -9,13 +9,6 @@
 
 While most security tools focus on signatures (what a file *looks* like), Sentinel Trace focuses on **contextual reasoning** (what a process *does*). It observes, contextualizes, and explains suspicious behaviors at the kernel level without modifying applications.
 
-## 🧠 Detection Philosophy: "Reasoning-First"
-We move away from noisy, signal-only alerts to focus on **explainable security**:
-- ✅ **Context over Isolation:** A shell is not a threat; a shell spawned by `nginx` is.
-- ✅ **Kernel-Level Truth:** Using eBPF for tamper-proof telemetry.
-- ✅ **Zero Instrumentation:** Security visibility with zero impact on application code.
-- ✅ **Evidence-Based:** Every alert must be backed by a clear parent/child process lineage.
-
 ### 🧭 Roadmap
 - [x] v1.0 Genesis: Single-signal detection & Manual reasoning.
 - [ ] v2.0 Correlation: Multi-signal (Process + Network) correlation (Work in Progress).
@@ -25,6 +18,15 @@ We move away from noisy, signal-only alerts to focus on **explainable security**
 ### Operating Systems
 - v1.0: Kali Linux & Debian Linux
 - v2.0: Kali Linux, Debian Linux & Metasploitable3
+
+## 🧠 Detection Philosophy: "Reasoning-First"
+We move away from noisy, signal-only alerts to focus on **explainable security**:
+- ✅ **Context over Isolation:** A shell is not a threat; a shell spawned by `nginx` is.
+- ✅ **Kernel-Level Truth:** Using eBPF for tamper-proof telemetry.
+- ✅ **Zero Instrumentation:** Security visibility with zero impact on application code.
+- ✅ **Evidence-Based:** Every alert must be backed by a clear parent/child process lineage.
+
+
 ---
 
 ## 🏗️ Architecture & Integration
